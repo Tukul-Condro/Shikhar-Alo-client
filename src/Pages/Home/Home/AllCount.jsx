@@ -2,7 +2,7 @@
 const AllCount = () => {
     return (
         <div className=' pt-10 pb-10 '>
-            <div className='pt-5 pb-1 mb-5 border-b-3'>800 million people live in extreme poverty. BRAC tackles poverty holistically. See your impact.</div>
+            <div className='pt-1 pb-1 mb-5 border-b-3'>800 million people live in extreme poverty. BRAC tackles poverty holistically. See your impact.</div>
             <div className='grid grid-cols-4 gap-2 text-center'>
                 <div className=''>
                 <h1 className='font-bold text-6xl'>15M</h1>
