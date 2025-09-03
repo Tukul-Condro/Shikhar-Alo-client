@@ -7,8 +7,8 @@ const Latest = () => {
     return (
         <div className='text-center'>
             <SectuionTitle heading={'Latest'}></SectuionTitle>
-            <div className='grid grid-cols-3 justify-between mt-9'>
-                <Card className="mt-6 w-80">
+            <div className='grid lg:grid-cols-3 gap-5 py-9'>
+                <Card className="mt-6 w-full">
                     <CardHeader color="blue-gray" className="relative  h-56 rounded-1">
                         <img
                         src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
@@ -26,7 +26,7 @@ const Latest = () => {
                         </Typography>
                     </CardBody>
                 </Card>
-                <Card className="mt-6 w-80">
+                <Card className="mt-6 w-full">
                     <CardHeader color="blue-gray" className="relative  h-56 rounded-1">
                         <img
                         src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
@@ -44,7 +44,7 @@ const Latest = () => {
                         </Typography>
                     </CardBody>
                 </Card>
-                <Card className="mt-6 w-80">
+                <Card className="mt-6 w-full">
                     <CardHeader color="blue-gray" className="relative  h-56 rounded-1">
                         <img
                         src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"

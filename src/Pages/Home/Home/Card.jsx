@@ -11,7 +11,7 @@ const Card = () => {
     return (
         <div className='text-center mb-5 pb-5'>
             <SectuionTitle heading={'what we do'}></SectuionTitle>
-            <div className='grid grid-cols-4 gap-2 pt-10'>
+            <div className='grid lg:grid-cols-4 gap-2 pt-10'>
             {imgs.map((img,key)=>(
                 <img
                     key={key}
