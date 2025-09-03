@@ -136,7 +136,7 @@ const NavBar2 = () => {
 
     return (
         <div className=" max-auto w-full">
-            <Navbar className="sticky top-0 z-10 h-max max-w-5xl mx-auto bg-pink-700 rounded-none  px-4 py-2 lg:px-8 lg:py-4">
+            <Navbar className="sticky top-0 z-10 h-max max-w-5xl mx-auto bg-pink-700 rounded-none  px-4 py-2 lg:px-8 lg:py-2">
             <div className="flex items-center justify-between text-withe ">
                 <Typography
                     as="a"

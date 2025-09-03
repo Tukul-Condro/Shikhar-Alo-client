@@ -9,7 +9,7 @@ const Card = () => {
     "https://www.material-tailwind.com/image/web3-card-1.svg",
     ];
     return (
-        <div className='text-center pb-5'>
+        <div className='text-center mb-5 pb-5'>
             <SectuionTitle heading={'what we do'}></SectuionTitle>
             <div className='grid grid-cols-4 gap-2 pt-10'>
             {imgs.map((img,key)=>(
