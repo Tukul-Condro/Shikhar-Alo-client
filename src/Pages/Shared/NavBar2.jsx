@@ -2,8 +2,10 @@ import React from 'react';
 import {
   Navbar,MobileNav,Typography,Button,IconButton,Avatar,Menu,MenuHandler,MenuList,
   MenuItem,
+  Collapse,
 } from "@material-tailwind/react";
 import { ChevronDownIcon, Cog6ToothIcon, InboxArrowDownIcon, LifebuoyIcon, PowerIcon, UserCircleIcon } from '@heroicons/react/16/solid';
+import { Link } from 'react-router-dom';
 
 // profile menu component
 const profileMenuItems = [
@@ -156,13 +158,16 @@ const NavBar2 = () => {
                 <div className="flex items-center gap-4">
                     <div className="mr-4 hidden lg:block">{navList}</div>
                     <div className="flex items-center gap-x-1">
-                    <Button
+                    <Link to='/login'>
+                      <Button
                         variant="text"
                         size="sm"
                         className="hidden lg:inline-block text-white text-xl"
+                        
                     >
                         <span>Log In</span>
                     </Button>
+                    </Link>
                     <ProfileMenu></ProfileMenu>
                     </div>
                     <IconButton
@@ -204,19 +209,21 @@ const NavBar2 = () => {
                     </IconButton>
                 </div>
             </div>
-                <MobileNav open={openNav}>
+                <Collapse open={openNav}>
                     <div className='sm:mr-3'>
                         {navList}
                     </div>
                 <div className="flex items-center gap-x-1">
-                    <Button fullWidth variant="text" size="sm" className="">
-                    <span>Log In</span>
-                    </Button>
+                    <Link to='/login'>
+                        <Button fullWidth variant="text" size="sm" className="">
+                          <span>Log In</span>
+                        </Button>
+                    </Link>
                     {/* <Button fullWidth variant="gradient" size="sm" className="">
                     <span>Sign in</span>
                     </Button> */}
                 </div>
-                </MobileNav>
+                </Collapse>
             </Navbar>
         </div>
     );
