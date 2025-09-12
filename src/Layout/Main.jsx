@@ -8,7 +8,7 @@ import NavBar2 from '../Pages/Shared/NavBar2';
 
 const Main = () => {
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
     const isLoginSignUp = location.pathname.includes('login') || location.pathname.includes('signup');
     return (
         <div>

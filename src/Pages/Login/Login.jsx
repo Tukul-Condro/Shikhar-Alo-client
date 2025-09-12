@@ -1,7 +1,14 @@
-import {Card,Input,Button,CardBody,CardHeader,Typography,} from "@material-tailwind/react";
+import {Card,Input,Button,CardBody,CardHeader,Typography} from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+    const handleLogin = event =>{
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email,password);
+    }
     return (
         <div>
             <Card shadow={false} className="mx-auto my-15 lg:w-2xl md:px-24 md:py-14 py-8 border border-gray-300">
@@ -19,9 +26,7 @@ const Login = () => {
                     </Typography>
                 </CardHeader>
                 <CardBody>
-                    <form
-                    action="#"
-                    className="flex flex-col gap-4 md:mt-8"
+                    <form onSubmit={handleLogin} action="#" className="flex flex-col gap-4 md:mt-8"
                     >
                     <div>
                         <label htmlFor="email">
@@ -69,9 +74,12 @@ const Login = () => {
                         }}
                         />
                     </div>
-                    <Button size="lg" color="gray" fullWidth>
-                        continue
-                    </Button>
+                    <div className="form-control mt-6 text-center w-full">
+                         <Button size="lg" color="gray" fullWidth>
+                            <input  type="submit" value="continue" />
+                        </Button>  
+                        
+                    </div>
                     <div>New to here? Creat an <Link to='/signup' className="font-medium">Account</Link> OR</div>
                     <Button
                         variant="outlined"

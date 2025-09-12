@@ -1,14 +1,14 @@
-import {
-  Card,
-  Input,
-  Button,
-  CardBody,
-  CardHeader,
-  Typography,
-} from "@material-tailwind/react";
+import {Card,Input,Button,CardBody,CardHeader,Typography,} from "@material-tailwind/react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
+
 const SignUp = () => {
+    const  { register,handleSubmit,formState: { errors },} = useForm();
+    const onSubmit = data => {
+        // console.log(data);
+    }
+   
     return (
         <div>
             <Card shadow={false} className="mx-auto my-15 lg:w-2xl md:px-24 md:py-14 py-8 border border-gray-300">
@@ -26,7 +26,7 @@ const SignUp = () => {
                     </Typography>
                 </CardHeader>
                 <CardBody>
-                    <form
+                    <form onSubmit={handleSubmit(onSubmit)}
                     action="#"
                     className="flex flex-col gap-4 md:mt-8"
                     >
@@ -40,7 +40,7 @@ const SignUp = () => {
                             Name
                         </Typography>
                         </label>
-                        <Input
+                        <Input {...register("name",{ })}
                         id="name"
                         color="gray"
                         size="lg"
@@ -52,6 +52,7 @@ const SignUp = () => {
                             className: "hidden",
                         }}
                         />
+                        {errors.name && <span>This field is required</span>}
                     </div>
                     <div>
                         <label htmlFor="link">
@@ -109,29 +110,35 @@ const SignUp = () => {
                              Email password
                         </Typography>
                         </label>
-                        <Input
+                        <Input 
+                        {...register("password",
+                            { required: true,
+                                pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* )/ ,
+                                minLength: 6,
+                                maxLength: 20 })} name='password' placeholder="password" 
                         id="password"
                         color="gray"
                         size="lg"
                         type="password"
-                        name="password"
-                        placeholder="password"
-                        className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
+                        className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200 input input-bordered"
                         labelProps={{
                             className: "hidden",
                         }}
                         />
+                        {errors.password && <span>This field is required</span>}
                     </div>
-                    <Button size="lg" color="gray" fullWidth>
+                    <Button type="submit" size="lg" color="gray" fullWidth>
                         continue
                     </Button>
 
                         <div>Already have an Account? Please <Link className="font-medium" to='/login'>Login</Link> OR </div>
 
+                     
+                    </form>
                      <Button
                         variant="outlined"
                         size="lg"
-                        className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
+                        className="flex mt-5 h-12 border-blue-gray-200 items-center justify-center gap-2"
                         fullWidth
                     >
                         <img
@@ -141,8 +148,6 @@ const SignUp = () => {
                         />{" "}
                         sign in with google
                     </Button>
-                     
-                    </form>
                    
                 </CardBody>
             </Card>
