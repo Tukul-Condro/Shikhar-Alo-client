@@ -1,16 +1,29 @@
 import {Card,Input,Button,CardBody,CardHeader,Typography} from "@material-tailwind/react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../ProviderContext/AuthContext";
+import { Title } from "react-head";
 
 const Login = () => {
+
+    const {signIn} = useContext(AuthContext);
+
     const handleLogin = event =>{
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email,password);
+        signIn(email,password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+        })
     }
+
     return (
         <div>
+            <Title>Login - Shikhar Alo</Title>
             <Card shadow={false} className="mx-auto my-15 lg:w-2xl md:px-24 md:py-14 py-8 border border-gray-300">
                 <CardHeader shadow={false} floated={false} className="text-center">
                     <Typography
@@ -76,10 +89,9 @@ const Login = () => {
                     </div>
                     <div className="form-control mt-6 text-center w-full">
                          <Button size="lg" color="gray" fullWidth>
-                            <input  type="submit" value="continue" />
+                            <input className="w-full" type="submit" value="continue" />
                         </Button>  
-                        
-                    </div>
+                     </div>
                     <div>New to here? Creat an <Link to='/signup' className="font-medium">Account</Link> OR</div>
                     <Button
                         variant="outlined"

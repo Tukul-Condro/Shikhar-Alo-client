@@ -1,16 +1,28 @@
 import {Card,Input,Button,CardBody,CardHeader,Typography,} from "@material-tailwind/react";
+import { useContext } from "react";
+import { Title } from "react-head";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../ProviderContext/AuthContext";
 
 
 const SignUp = () => {
-    const  { register,handleSubmit,formState: { errors },} = useForm();
+    const  { register,handleSubmit,watch,formState: { errors },} = useForm();
+    const {creatUser} = useContext(AuthContext);
+
     const onSubmit = data => {
-        // console.log(data);
+        console.log(data);
+        creatUser(data.email, data.password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+        })
     }
+    console.log(watch("example"))
    
     return (
         <div>
+            <Title>SignUp - Shikhar Alo</Title>
             <Card shadow={false} className="mx-auto my-15 lg:w-2xl md:px-24 md:py-14 py-8 border border-gray-300">
                 <CardHeader shadow={false} floated={false} className="text-center">
                     <Typography
@@ -40,20 +52,21 @@ const SignUp = () => {
                             Name
                         </Typography>
                         </label>
-                        <Input {...register("name",{ })}
+                        <Input {...register("name",{ required:true})}
                         id="name"
                         color="gray"
                         size="lg"
                         type="text"
-                        name="Name"
+                        name="name"
                         placeholder="Enter your name"
                         className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
                         labelProps={{
                             className: "hidden",
                         }}
                         />
-                        {errors.name && <span>This field is required</span>}
+                        {errors.name && <span className="text-red-500">Name field is required</span>}
                     </div>
+
                     <div>
                         <label htmlFor="link">
                         <Typography
@@ -77,6 +90,7 @@ const SignUp = () => {
                         }}
                         />
                     </div>
+
                     <div>
                         <label htmlFor="email">
                         <Typography
@@ -87,7 +101,7 @@ const SignUp = () => {
                             Your Email
                         </Typography>
                         </label>
-                        <Input
+                        <Input {...register("email",{ required:true})}
                         id="email"
                         color="gray"
                         size="lg"
@@ -99,7 +113,9 @@ const SignUp = () => {
                             className: "hidden",
                         }}
                         />
+                        {errors.email && <span className="text-red-500">Email field is required</span>}
                     </div>
+
                     <div>
                         <label htmlFor="email">
                         <Typography
@@ -110,25 +126,29 @@ const SignUp = () => {
                              Email password
                         </Typography>
                         </label>
-                        <Input 
+                        <Input type="password"
                         {...register("password",
                             { required: true,
                                 pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* )/ ,
                                 minLength: 6,
-                                maxLength: 20 })} name='password' placeholder="password" 
+                                maxLength: 20 })}
+                         name='password' placeholder="password" 
                         id="password"
                         color="gray"
                         size="lg"
-                        type="password"
                         className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200 input input-bordered"
                         labelProps={{
                             className: "hidden",
                         }}
                         />
-                        {errors.password && <span>This field is required</span>}
+                            {errors.password?.type === "required" && <span className='text-red-600'>password is required</span>}
+                            {errors.password?.type === "minLength" && <span className='text-red-600'>minimam 6 character</span>}
+                            {errors.password?.type === "maxLength" && <span className='text-red-600'>Maximan 20 characters</span>}
+                            {errors.password?.type === "pattern" && <span className='text-red-600'>password must be one uppercase, one lowercase, one digit and one spaceil character</span>}
                     </div>
+
                     <Button type="submit" size="lg" color="gray" fullWidth>
-                        continue
+                        <input type="submit" value="continue" />
                     </Button>
 
                         <div>Already have an Account? Please <Link className="font-medium" to='/login'>Login</Link> OR </div>
