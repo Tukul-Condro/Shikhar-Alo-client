@@ -8,7 +8,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element:<Main></Main>,
-    errorElement:<h>page not found</h>,
+    errorElement:<h><span className="mx-150  text-2xl ">page not found</span></h>,
     children:[
         {
             path:'/',

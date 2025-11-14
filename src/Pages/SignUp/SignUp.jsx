@@ -1,13 +1,13 @@
-import {Card,Input,Button,CardBody,CardHeader,Typography,} from "@material-tailwind/react";
+import {Card,Input,Button,CardBody,CardHeader,Typography, Select, Option,} from "@material-tailwind/react";
 import { useContext } from "react";
 import { Title } from "react-head";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../ProviderContext/AuthContext";
 
 
 const SignUp = () => {
-    const  { register,handleSubmit,watch,formState: { errors },} = useForm();
+    const  { control, register,handleSubmit,watch,formState: { errors },} = useForm();
     const {creatUser} = useContext(AuthContext);
 
     const onSubmit = data => {
@@ -146,6 +146,96 @@ const SignUp = () => {
                             {errors.password?.type === "maxLength" && <span className='text-red-600'>Maximan 20 characters</span>}
                             {errors.password?.type === "pattern" && <span className='text-red-600'>password must be one uppercase, one lowercase, one digit and one spaceil character</span>}
                     </div>
+                    <div className="w-full">
+                        <Controller
+                            name="role"
+                            control={control}
+                            rules={{required:"role is required"}}
+                            render={({field,fieldState}) =>(
+                                <>
+                                    <Select label="Select Role"{...field}>
+                                        <Option>Employee</Option>
+                                        <Option>HR</Option>
+                                    </Select>
+                                    {fieldState.error && (
+                                        <p className="text-red-500">
+                                            {fieldState.error.message}
+                                        </p>
+                                    )}
+                                </>
+                            )}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="account_no">
+                        <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="block font-medium mb-2"
+                        >
+                            Bank Account No
+                        </Typography>
+                        </label>
+                        <Input {...register("account_no",{ required:true})}
+                        id="account_no"
+                        color="gray"
+                        size="lg"
+                        type="account_no"
+                        name="account_no"
+                        placeholder=" input Bank_account_no"
+                        className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
+                        labelProps={{
+                            className: "hidden",
+                        }}
+                        />
+                        {errors.email && <span className="text-red-500">Bank Account field is required</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="salary">
+                        <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="block font-medium mb-2"
+                        >
+                            Salary
+                        </Typography>
+                        </label>
+                        <Input {...register("salary",{ required:true})}
+                        id="salary"
+                        color="gray"
+                        size="lg"
+                        type="salary"
+                        name="salary"
+                        placeholder="inter here salary amount"
+                        className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
+                        labelProps={{
+                            className: "hidden",
+                        }}
+                        />
+                        {errors.email && <span className="text-red-500">Salary field is required</span>}
+                    </div>
+                    <div className="w-full">
+                        <Controller
+                            name="designation"
+                            control={control}
+                            rules={{required:"designation is required"}}
+                            render={({field,fieldState}) =>(
+                                <>
+                                    <Select label="Select Designation"{...field}>
+                                        <Option>Sales Assistant</Option>
+                                        <Option>Social Media Executive</Option>
+                                        <Option>Digital Marketer</Option>
+                                    </Select>
+                                    {fieldState.error && (
+                                        <p className="text-red-500">
+                                            {fieldState.error.message}
+                                        </p>
+                                    )}
+                                </>
+                            )}
+                        />
+                    </div>
+                    
 
                     <Button type="submit" size="lg" color="gray" fullWidth>
                         <input type="submit" value="continue" />
