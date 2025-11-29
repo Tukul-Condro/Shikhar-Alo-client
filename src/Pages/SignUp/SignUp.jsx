@@ -4,6 +4,7 @@ import { Title } from "react-head";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../ProviderContext/AuthContext";
+import GoogleLogin from "../SocialLogin/GoogleLogin";
 
 
 const SignUp = () => {
@@ -245,19 +246,7 @@ const SignUp = () => {
 
                      
                     </form>
-                     <Button
-                        variant="outlined"
-                        size="lg"
-                        className="flex mt-5 h-12 border-blue-gray-200 items-center justify-center gap-2"
-                        fullWidth
-                    >
-                        <img
-                        src={`https://www.material-tailwind.com/logos/logo-google.png`}
-                        alt="google"
-                        className="h-6 w-6"
-                        />{" "}
-                        sign in with google
-                    </Button>
+                     <GoogleLogin></GoogleLogin>
                    
                 </CardBody>
             </Card>

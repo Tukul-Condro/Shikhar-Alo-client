@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../ProviderContext/AuthContext";
 import { Title } from "react-head";
+import GoogleLogin from "../SocialLogin/GoogleLogin";
 
 const Login = () => {
 
@@ -93,20 +94,8 @@ const Login = () => {
                         </Button>  
                      </div>
                     <div>New to here? Creat an <Link to='/signup' className="font-medium">Account</Link> OR</div>
-                    <Button
-                        variant="outlined"
-                        size="lg"
-                        className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
-                        fullWidth
-                    >
-                        <img
-                        src={`https://www.material-tailwind.com/logos/logo-google.png`}
-                        alt="google"
-                        className="h-6 w-6"
-                        />{" "}
-                        sign in with google
-                    </Button>
                     </form>
+                   <GoogleLogin></GoogleLogin>
                      
                     
                     
