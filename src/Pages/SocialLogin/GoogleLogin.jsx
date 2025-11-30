@@ -1,14 +1,25 @@
 import { Button } from "@material-tailwind/react";
 import useAuth from "../../Hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const GoogleLogin = () => {
 
     const {googleSinIn} = useAuth(); 
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     const handleGoogleSignIn = () =>{
         googleSinIn()
         .then(result =>{
             console.log(result.user)
+            Swal.fire({
+                title: "SignIn Success",
+                icon: "success"
+            });
+            navigate(from , {replace : true});
         })
     }
     return (

@@ -2,14 +2,19 @@ import {Card,Input,Button,CardBody,CardHeader,Typography, Select, Option,} from 
 import { useContext } from "react";
 import { Title } from "react-head";
 import { Controller, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../ProviderContext/AuthContext";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
+import Swal from "sweetalert2";
 
 
 const SignUp = () => {
     const  { control, register,handleSubmit,watch,formState: { errors },} = useForm();
     const {creatUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     const onSubmit = data => {
         console.log(data);
@@ -17,6 +22,11 @@ const SignUp = () => {
         .then(result =>{
             const loggedUser = result.user;
             console.log(loggedUser);
+             Swal.fire({
+                    title: "SignUp Success",
+                    icon: "success"
+                });
+                navigate(from , {replace : true});
         })
     }
     console.log(watch("example"))
@@ -151,18 +161,18 @@ const SignUp = () => {
                         <Controller
                             name="role"
                             control={control}
-                            rules={{required:"role is required"}}
-                            render={({field,fieldState}) =>(
+                            // rules={{required:"role is required"}}
+                            render={({field}) =>(
                                 <>
                                     <Select label="Select Role"{...field}>
                                         <Option>Employee</Option>
                                         <Option>HR</Option>
                                     </Select>
-                                    {fieldState.error && (
+                                    {/* {fieldState.error && (
                                         <p className="text-red-500">
                                             {fieldState.error.message}
                                         </p>
-                                    )}
+                                    )} */}
                                 </>
                             )}
                         />
@@ -219,19 +229,19 @@ const SignUp = () => {
                         <Controller
                             name="designation"
                             control={control}
-                            rules={{required:"designation is required"}}
-                            render={({field,fieldState}) =>(
+                            // rules={{required:"designation is required"}}
+                            render={({field}) =>(
                                 <>
                                     <Select label="Select Designation"{...field}>
                                         <Option>Sales Assistant</Option>
                                         <Option>Social Media Executive</Option>
                                         <Option>Digital Marketer</Option>
                                     </Select>
-                                    {fieldState.error && (
+                                    {/* {fieldState.error && (
                                         <p className="text-red-500">
                                             {fieldState.error.message}
                                         </p>
-                                    )}
+                                    )} */}
                                 </>
                             )}
                         />
@@ -242,11 +252,11 @@ const SignUp = () => {
                         <input type="submit" value="continue" />
                     </Button>
 
-                        <div>Already have an Account? Please <Link className="font-medium" to='/login'>Login</Link> OR </div>
+                    <div>Already have an Account? Please <Link className="font-medium" to='/login'>Login</Link> OR </div>
 
-                     
-                    </form>
                      <GoogleLogin></GoogleLogin>
+
+                    </form>
                    
                 </CardBody>
             </Card>

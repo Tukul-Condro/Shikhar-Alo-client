@@ -1,25 +1,48 @@
 import {Card,Input,Button,CardBody,CardHeader,Typography} from "@material-tailwind/react";
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../ProviderContext/AuthContext";
 import { Title } from "react-head";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
+import Swal from "sweetalert2";
+
 
 const Login = () => {
 
     const {signIn} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
+    const from = location.state?.from?.pathname || "/";
+    
     const handleLogin = event =>{
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+
         console.log(email,password);
+
         signIn(email,password)
         .then(result =>{
             const user = result.user;
             console.log(user);
+            Swal.fire({
+                    title: "Login Successfull!",
+                    icon: "success"
+                });
+            navigate(from, { replace: true});
         })
+        .catch(error => {
+            console.log(error.code);
+            {
+            Swal.fire({
+                icon: "error",
+                title: "Email not found",
+                text: "This email is not registered.",
+            });
+          }
+        });
     }
 
     return (
@@ -52,7 +75,7 @@ const Login = () => {
                             Your Email
                         </Typography>
                         </label>
-                        <Input
+                        <Input 
                         id="email"
                         color="gray"
                         size="lg"
@@ -91,7 +114,10 @@ const Login = () => {
                     <div className="form-control mt-6 text-center w-full">
                          <Button size="lg" color="gray" fullWidth>
                             <input className="w-full" type="submit" value="continue" />
-                        </Button>  
+                        </Button> 
+                        {/* {errorMessage && (
+                         <p className="text-red-500 text-sm text-center mt-2">{errorMessage}</p>
+                        )}  */}
                      </div>
                     <div>New to here? Creat an <Link to='/signup' className="font-medium">Account</Link> OR</div>
                     </form>
