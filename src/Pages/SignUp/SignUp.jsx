@@ -6,9 +6,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../ProviderContext/AuthContext";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic();
     const  { control, register,handleSubmit,watch,formState: { errors },} = useForm();
     const {creatUser} = useContext(AuthContext);
     const navigate = useNavigate();
@@ -22,11 +24,29 @@ const SignUp = () => {
         .then(result =>{
             const loggedUser = result.user;
             console.log(loggedUser);
-             Swal.fire({
-                    title: "SignUp Success",
-                    icon: "success"
-                });
-                navigate(from , {replace : true});
+            const userInfo ={
+                name: data.name,
+                email: data.email,
+                photo: data.link,
+                role: data.role,
+                account_no: data.account_no,
+                salary: data.salary,
+                designation: data.designation,
+                createdAt: new Date()
+            }
+            axiosPublic.post('/users', userInfo )
+            .then(res =>{
+                if(res.data.insertedId){
+                    console.log('user added to the database')
+                    Swal.fire({
+                        position: "top-end",
+                        title: "SignUp Success",
+                        icon: "success"
+                    });
+                    navigate(from , {replace : true});
+                }
+            })
+             
         })
     }
     console.log(watch("example"))

@@ -2,10 +2,12 @@ import { Button } from "@material-tailwind/react";
 import useAuth from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const GoogleLogin = () => {
 
     const {googleSinIn} = useAuth(); 
+    const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -15,11 +17,20 @@ const GoogleLogin = () => {
         googleSinIn()
         .then(result =>{
             console.log(result.user)
-            Swal.fire({
-                title: "SignIn Success",
-                icon: "success"
-            });
-            navigate(from , {replace : true});
+            const userInfo ={
+                email: result.user?.email,
+                name: result.user?.displayName
+            }
+            axiosPublic.post('/users',userInfo)
+            .then(res =>{
+                console.log(res.data)
+                Swal.fire({
+                    position: "top-end",
+                    title: "SignIn Success",
+                    icon: "success",
+                });
+                navigate(from , {replace : true});
+            })
         })
     }
     return (
