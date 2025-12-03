@@ -3,6 +3,8 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import DashBord from "../Layout/DashBord";
+import Employee from "../Pages/DashBord/Employee/Employee";
 
 export const router = createBrowserRouter([
   {
@@ -24,4 +26,14 @@ export const router = createBrowserRouter([
         }
     ]
   },
+  {
+    path:'dashbord',
+    element:<DashBord></DashBord>,
+    children:[
+      {
+        path:'employee',
+        element:<Employee></Employee>
+      }
+    ]
+  }
 ]);

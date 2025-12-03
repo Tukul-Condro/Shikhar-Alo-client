@@ -9,7 +9,7 @@ import { router } from './Routes/Routers';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
     </ThemeProvider>  
+      <RouterProvider router={router} />
   </StrictMode>,
 )

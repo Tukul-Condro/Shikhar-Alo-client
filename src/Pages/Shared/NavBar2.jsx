@@ -111,9 +111,9 @@ const NavBar2 = () => {
             color="blue-gray"
             className="p-1 font-normal"
         >
-            <a href="#" className="flex items-center font-bold text-xl">
-            DasBoard
-            </a>
+            <li className="flex items-center font-bold text-xl">
+            <Link to="/dashbord/employee">DashBord</Link>
+            </li>
         </Typography>
         <Typography
             as="li"
