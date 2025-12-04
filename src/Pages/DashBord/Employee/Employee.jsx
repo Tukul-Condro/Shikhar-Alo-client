@@ -1,9 +1,10 @@
 import { Button, Card, Checkbox, Input, Typography } from '@material-tailwind/react';
 import React from 'react';
+import WorkSheet from './WorkSheet';
 
 const Employee = () => {
     return (
-        <div className=' gap-1 rounded-full mx-10 mt-7'>
+        <div className=' gap-1  ml-5 mt-7'>
             <Card color="transparent" shadow={false}>
                 <Typography variant="h4" color="blue-gray">
                     Employee
@@ -55,6 +56,7 @@ const Employee = () => {
                     
                 </form>
             </Card>
+            <WorkSheet></WorkSheet>
         </div>
     );
 };
