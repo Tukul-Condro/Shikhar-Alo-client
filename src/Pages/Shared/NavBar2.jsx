@@ -101,9 +101,9 @@ const NavBar2 = () => {
             color="blue-gray"
             className="p-1 font-normal"
         >
-            <a href="#" className="flex items-center font-bold text-xl">
+            <Link to='/' href="#" className="flex items-center font-bold text-xl">
             Home
-            </a>
+            </Link>
         </Typography>
         <Typography
             as="li"
@@ -121,9 +121,9 @@ const NavBar2 = () => {
             color="blue-gray"
             className="p-1 font-normal"
         >
-            <a href="#" className="flex items-center font-bold text-xl">
+            <Link to='/contact' href="#" className="flex items-center font-bold text-xl">
             Contact Us
-            </a>
+            </Link>
         </Typography> 
           {
             user ? <>

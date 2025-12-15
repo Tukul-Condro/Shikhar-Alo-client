@@ -5,6 +5,8 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import DashBord from "../Layout/DashBord";
 import Employee from "../Pages/DashBord/Employee/Employee";
+import PrivateRoute from "./PrivateRoute";
+import Contact from "../Pages/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +25,10 @@ export const router = createBrowserRouter([
         {
           path:'/signup',
           element:<SignUp></SignUp>
+        },
+        {
+          path:'/contact',
+          element:<PrivateRoute><Contact></Contact></PrivateRoute>
         }
     ]
   },

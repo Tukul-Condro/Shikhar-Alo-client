@@ -1,5 +1,4 @@
-import { Button, Card, Checkbox, Input, Typography } from '@material-tailwind/react';
-import React from 'react';
+import { Button, Card, Input, Typography } from '@material-tailwind/react';
 import WorkSheet from './WorkSheet';
 
 const Employee = () => {
@@ -18,8 +17,9 @@ const Employee = () => {
                         Tasks
                     </Typography>
                     <Input
+                        type="text"
                         size="lg"
-                        placeholder="name@mail.com"
+                        placeholder="Type your Task"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         labelProps={{
                         className: "before:content-none after:content-none",
@@ -29,8 +29,9 @@ const Employee = () => {
                         Hours Worked
                     </Typography>
                     <Input
+                        type="number"
                         size="lg"
-                        placeholder="name@mail.com"
+                        placeholder="enter time"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         labelProps={{
                         className: "before:content-none after:content-none",
@@ -40,7 +41,7 @@ const Employee = () => {
                         Date
                     </Typography>
                     <Input
-                        type="password"
+                        type="date"
                         size="lg"
                         placeholder="********"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
