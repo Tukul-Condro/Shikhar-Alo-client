@@ -5,11 +5,14 @@ import './index.css'
 import { ThemeProvider } from '@material-tailwind/react'
 import { RouterProvider} from "react-router";
 import { router } from './Routes/Routers';
+import AuthProvider from './ProviderContext/AuthProvider';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>  
-      <RouterProvider router={router} />
   </StrictMode>,
 )

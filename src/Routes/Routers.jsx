@@ -31,10 +31,10 @@ export const router = createBrowserRouter([
           element:<PrivateRoute><Contact></Contact></PrivateRoute>
         }
     ]
-  },
+  },  
   {
     path:'dashbord',
-    element:<DashBord></DashBord>,
+    element:<PrivateRoute><DashBord></DashBord></PrivateRoute>,
     children:[
       {
         path:'employee',

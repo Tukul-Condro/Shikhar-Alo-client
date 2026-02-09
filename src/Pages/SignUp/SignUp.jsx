@@ -7,49 +7,107 @@ import { AuthContext } from "../../ProviderContext/AuthContext";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import uploadImage from "../../Api/uploadImage";
 
 
 const SignUp = () => {
     const axiosPublic = useAxiosPublic();
-    const  { control, register,handleSubmit,watch,formState: { errors },} = useForm();
+    const  { control, register,handleSubmit,formState: { errors },} = useForm();
     const {creatUser} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || "/";
 
-    const onSubmit = data => {
-        console.log(data);
-        creatUser(data.email, data.password)
-        .then(result =>{
-            const loggedUser = result.user;
-            console.log(loggedUser);
-            const userInfo ={
-                name: data.name,
-                email: data.email,
-                photo: data.link,
-                role: data.role,
-                account_no: data.account_no,
-                salary: data.salary,
-                designation: data.designation,
-                createdAt: new Date()
-            }
-            axiosPublic.post('/users', userInfo )
-            .then(res =>{
-                if(res.data.insertedId){
-                    console.log('user added to the database')
-                    Swal.fire({
-                        position: "top-end",
-                        title: "SignUp Success",
-                        icon: "success"
-                    });
-                    navigate(from , {replace : true});
-                }
-            })
-             
-        })
+    const onSubmit = async (formData) => {
+    try {
+        // 1️⃣ Firebase user create
+        const result = await creatUser(formData.email, formData.password);
+        console.log("Firebase User:", result.user);
+
+        // 2️⃣ Image upload
+        const imageFile = formData.image[0];
+        const imageUrl = await uploadImage(imageFile);
+        console.log("Image URL:", imageUrl);
+
+        // 3️⃣ User info prepare
+        const userInfo = {
+        name: formData.name,
+        email: formData.email,
+        image: imageUrl,
+        role: formData.role,
+        account_no: formData.account_no,
+        salary: formData.salary,
+        designation: formData.designation,
+        createdAt: new Date(),
+        };
+
+        // 4️⃣ Save to database using axiosPublic
+        const res = await axiosPublic.post("/users", userInfo);
+
+        if (res.data.insertedId) {
+        Swal.fire({
+            position: "top-end",
+            title: "SignUp Success",
+            icon: "success",
+        });
+        navigate(from, { replace: true });
+        }
+
+    } catch (error) {
+        console.error("Signup Error:", error);
+        Swal.fire({
+        icon: "error",
+        title: "Signup Failed",
+        text: error.message,
+        });
     }
-    console.log(watch("example"))
+};
+
+    // const onSubmit = async(formData) => {
+    //     console.log(formData.image[0]);
+    //     // Firebase user create
+    //     const result = await creatUser(formData.email, formData.password)
+    //     console.log("Firebase User:", result.user);
+    //     //  Image upload (reuseable function)
+    //     const imageFile = formData.image[0];
+    //     const imageUrl = await uploadImage(imageFile);
+    //     console.log('image URL', imageFile)
+
+    //     // user info
+    //     .then(result =>{
+    //         const loggedUser = result.user;
+    //         console.log(loggedUser);
+    //         const userInfo ={
+    //             name: formData.name,
+    //             email: formData.email,
+    //             image: imageUrl,
+    //             role: formData.role,
+    //             account_no: formData.account_no,
+    //             salary: formData.salary,
+    //             designation: formData.designation,
+    //             createdAt: new Date()
+                
+    //         }
+            
+            
+    //         const res = await axiosPublic.post('/users', userInfo )
+    //         .then(res =>{
+    //             if(res.data.insertedId){
+    //                 console.log('user added to the database')
+    //                 Swal.fire({
+    //                     position: "top-end",
+    //                     title: "SignUp Success",
+    //                     icon: "success"
+    //                 });
+    //                 navigate(from , {replace : true});
+    //             }
+    //         })
+             
+    //         // console.log(userInfo)
+    //     })
+    // }
+    // console.log(watch("example"))
    
     return (
         <div>
@@ -105,16 +163,17 @@ const SignUp = () => {
                             color="blue-gray"
                             className="block font-medium mb-2"
                         >
-                            Photo URL
+                            Photo
                         </Typography>
                         </label>
-                        <Input
-                        id="link"
+                        <Input {...register("image",{ required:true})}
+                        id="image"
                         color="gray"
                         size="lg"
-                        type="link"
-                        name="link"
-                        placeholder="image link"
+                        type="file"
+                        name="image"
+                        placeholder="upload image"
+                        accept="image/*"
                         className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
                         labelProps={{
                             className: "hidden",

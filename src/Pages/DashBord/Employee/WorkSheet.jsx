@@ -1,39 +1,12 @@
 import { Card, Typography } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["Job", "WorkTime", "WorkingDay", ""];
+const TABLE_HEAD = ["Job", "WorkTime", "WorkingDay", "", "" ];
  
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-];
  
-const WorkSheet = () => {
+const WorkSheet = ({works = []}) => {
     return (
         <div>
-            <Card className="h-full w-full overflow-scroll">
+            <Card className="h-full w-full ">
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>
                     <tr>
@@ -54,7 +27,44 @@ const WorkSheet = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {TABLE_ROWS.map(({ name, job, date }, index) => {
+                    {works.length === 0 && (
+                        <tr>
+                        <td colSpan="4" className="text-center p-2 text-gray-500">
+                            No work added yet
+                        </td>
+                        </tr>
+                    )}
+                    {works.map((w, idx) => (
+                        <tr key={idx} className="border-b">
+                        <td className="p-2">{w.task}</td>
+                        <td className="p-2">{w.workHour}</td>
+                        <td className="p-2">{w.date}</td>
+                        <td className="p-2">{w.name}</td>
+                        <td className=''>
+                            <Typography
+                                as="a"
+                                href="#"
+                                variant="small"
+                                color="blue-gray"
+                                className="font-medium"
+                            >
+                                Edit
+                            </Typography>
+                            </td>
+                            <td className=''>
+                            <Typography
+                                as="a"
+                                href="#"
+                                variant="small"
+                                color="blue-gray"
+                                className="font-medium"
+                            >
+                                Delete
+                            </Typography>
+                            </td>
+                        </tr>
+                    ))}
+                    {/* {TABLE_ROWS.map(({ name, job, date }, index) => {
                         const isLast = index === TABLE_ROWS.length - 1;
                         const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
             
@@ -106,12 +116,12 @@ const WorkSheet = () => {
                                 color="blue-gray"
                                 className="font-medium"
                             >
-                                Delet
+                                Delete
                             </Typography>
                             </td>
                         </tr>
                         );
-                    })}
+                    })} */}
                     </tbody>
                 </table>
             </Card>

@@ -29,8 +29,8 @@ const GoogleLogin = () => {
                     title: "SignIn Success",
                     icon: "success",
                 });
-                navigate(from , {replace : true});
             })
+            navigate(from , {replace : true});
         })
     }
     return (
