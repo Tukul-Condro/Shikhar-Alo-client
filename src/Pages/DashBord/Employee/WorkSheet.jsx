@@ -4,6 +4,7 @@ const TABLE_HEAD = ["Job", "WorkTime", "WorkingDay", "", "" ];
  
  
 const WorkSheet = ({works = []}) => {
+    
     return (
         <div>
             <Card className="h-full w-full ">
@@ -39,7 +40,6 @@ const WorkSheet = ({works = []}) => {
                         <td className="p-2">{w.task}</td>
                         <td className="p-2">{w.workHour}</td>
                         <td className="p-2">{w.date}</td>
-                        <td className="p-2">{w.name}</td>
                         <td className=''>
                             <Typography
                                 as="a"
@@ -64,64 +64,7 @@ const WorkSheet = ({works = []}) => {
                             </td>
                         </tr>
                     ))}
-                    {/* {TABLE_ROWS.map(({ name, job, date }, index) => {
-                        const isLast = index === TABLE_ROWS.length - 1;
-                        const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
-            
-                        return (
-                        <tr key={name}>
-                            <td className={classes}>
-                            <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                            >
-                                {name}
-                            </Typography>
-                            </td>
-                            <td className={classes}>
-                            <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                            >
-                                {job}
-                            </Typography>
-                            </td>
-                            <td className={classes}>
-                            <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                            >
-                                {date}
-                            </Typography>
-                            </td>
-                            <td className={classes}>
-                            <Typography
-                                as="a"
-                                href="#"
-                                variant="small"
-                                color="blue-gray"
-                                className="font-medium"
-                            >
-                                Edit
-                            </Typography>
-                            </td>
-                            <td className={classes}>
-                            <Typography
-                                as="a"
-                                href="#"
-                                variant="small"
-                                color="blue-gray"
-                                className="font-medium"
-                            >
-                                Delete
-                            </Typography>
-                            </td>
-                        </tr>
-                        );
-                    })} */}
+                   
                     </tbody>
                 </table>
             </Card>
