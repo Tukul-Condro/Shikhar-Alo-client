@@ -240,19 +240,23 @@ const SignUp = () => {
                         <Controller
                             name="role"
                             control={control}
-                            // rules={{required:"role is required"}}
-                            render={({field}) =>(
-                                <>
-                                    <Select label="Select Role"{...field}>
+                            rules={{required:"role is required"}}
+                            render={({field,fieldState}) =>(
+                                <div className="mb-2">
+                                    <Select 
+                                        label="Select Role"{...field}
+                                        value={field.value || ""}
+                                        onChange={field.onChange}
+                                    >
                                         <Option>Employee</Option>
                                         <Option>HR</Option>
                                     </Select>
-                                    {/* {fieldState.error && (
-                                        <p className="text-red-500">
+                                    {fieldState.error && (
+                                        <p className="text-red-500 text-sm mt-1">
                                             {fieldState.error.message}
                                         </p>
-                                    )} */}
-                                </>
+                                    )}
+                                </div>
                             )}
                         />
                     </div>
@@ -308,19 +312,23 @@ const SignUp = () => {
                         <Controller
                             name="designation"
                             control={control}
-                            // rules={{required:"designation is required"}}
-                            render={({field}) =>(
+                            rules={{required:"designation is required"}}
+                            render={({field,fieldState}) =>(
                                 <>
-                                    <Select label="Select Designation"{...field}>
+                                    <Select 
+                                        label="Select Designation"{...field}
+                                        value={field.value || ""}
+                                        onChange={field.onChange}
+                                    >
                                         <Option>Sales Assistant</Option>
                                         <Option>Social Media Executive</Option>
                                         <Option>Digital Marketer</Option>
                                     </Select>
-                                    {/* {fieldState.error && (
-                                        <p className="text-red-500">
+                                    {fieldState.error && (
+                                        <p className="text-red-500 text-sm mt-1">
                                             {fieldState.error.message}
                                         </p>
-                                    )} */}
+                                    )}
                                 </>
                             )}
                         />

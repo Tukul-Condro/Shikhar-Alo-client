@@ -17,7 +17,7 @@ const AddWorkForm = ({ onSubmit }) => {
 
     return (
         <Card color="transparent" shadow={false}>
-            <Typography variant="h4">Employee</Typography>
+            <Typography variant="h2">Submit your work here</Typography>
 
             <form onSubmit={handleSubmit(submitHandler)} className="mt-8 mb-2 w-full">
 
