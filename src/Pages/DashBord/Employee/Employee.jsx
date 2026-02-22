@@ -73,9 +73,7 @@ const Employee = () => {
 
             if(res.data.insertedId){
                 Swal.fire("Work Added Successfully");
-                const works = await AxiosSecure.get(
-                `/works/${user.email}`
-                );
+                const works = await AxiosSecure.get(`/works/${user.email}`);
                 setWorks(works.data);
             }
         }catch(err){

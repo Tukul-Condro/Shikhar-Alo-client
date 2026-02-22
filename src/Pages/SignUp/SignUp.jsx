@@ -248,8 +248,8 @@ const SignUp = () => {
                                         value={field.value || ""}
                                         onChange={field.onChange}
                                     >
-                                        <Option>Employee</Option>
-                                        <Option>HR</Option>
+                                        <Option value="Employee">Employee</Option>
+                                        <Option value="HR">HR</Option>
                                     </Select>
                                     {fieldState.error && (
                                         <p className="text-red-500 text-sm mt-1">
@@ -274,7 +274,7 @@ const SignUp = () => {
                         id="account_no"
                         color="gray"
                         size="lg"
-                        type="account_no"
+                        type="number"
                         name="account_no"
                         placeholder=" input Bank_account_no"
                         className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
@@ -320,9 +320,9 @@ const SignUp = () => {
                                         value={field.value || ""}
                                         onChange={field.onChange}
                                     >
-                                        <Option>Sales Assistant</Option>
-                                        <Option>Social Media Executive</Option>
-                                        <Option>Digital Marketer</Option>
+                                        <Option value="Sales Assistant">Sales Assistant</Option>
+                                        <Option value="Social Media Executive">Social Media Executive</Option>
+                                        <Option value="Digital Marketer">Digital Marketer</Option>
                                     </Select>
                                     {fieldState.error && (
                                         <p className="text-red-500 text-sm mt-1">

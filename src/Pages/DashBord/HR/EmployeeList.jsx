@@ -15,7 +15,7 @@ const EmployeeList = () => {
     return (
         <div className="w-full overflow-hidden px-5 mt-5">
             <Typography variant='h2' className='text-center font-medium'>
-                ALL Employee is here - {users.length}
+                All Employee is here - {users.length}
             </Typography>
             <table className="w-full mt-8 text-center">
                 <thead className="w-full min-w-max table-auto text-left">
@@ -32,7 +32,7 @@ const EmployeeList = () => {
                        </tr>
                      </thead>
                 <tbody className="group text-sm text-gray-700 dark:text-white">
-                       {users.map(({ name,email, bankAccount,salary}, index) => {
+                       {users.map(({ name,email, account_no,salary}, index) => {
                          return (
                            <tr
                              key={index}
@@ -40,7 +40,7 @@ const EmployeeList = () => {
                            >
                              <td className="p-3">{name}</td>
                              <td className="p-3">{email}</td>
-                             <td className="p-3">{bankAccount}</td>
+                             <td className="p-3">{account_no}</td>
                              <td className="p-3">{salary}</td>
                              <td className="p-3">
                                 {

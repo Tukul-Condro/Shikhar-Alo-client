@@ -14,7 +14,7 @@ const AllEmployee = () => {
 
     return (
         <div className="w-full overflow-hidden px-5 mt-5">
-            <Typography variant='h2' className='text-center font-medium text-gray-700'>ALL Employee</Typography>
+            <Typography variant='h2' className='text-center font-medium text-gray-700'>All Employee</Typography>
             <Typography variant='h4' className='text-center font-medium text-gray-700'>Total Employee are : {users.length}</Typography>
          <table className="w-full mt-8 text-center">
                  <thead className="w-full min-w-max table-auto text-left">
