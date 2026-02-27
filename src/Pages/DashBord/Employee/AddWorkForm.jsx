@@ -11,7 +11,6 @@ const AddWorkForm = ({ onSubmit }) => {
         if (onSubmit) {
             onSubmit(data);
         }
-
         reset();
     };
 
@@ -48,8 +47,7 @@ const AddWorkForm = ({ onSubmit }) => {
                         )}
                     />
 
-
-
+                    
                     {/* Work Hour */}
                     <Controller
                         
@@ -98,7 +96,7 @@ const AddWorkForm = ({ onSubmit }) => {
                     />
 
 
-                    <button type="submit" className="bg-gray-600 text-white px-4 py-2 rounded">
+                    <button type="submit" className="bg-gray-600 text-white hover:bg-gray-800 px-4 py-2 rounded">
                         Add Work
                     </button>
 

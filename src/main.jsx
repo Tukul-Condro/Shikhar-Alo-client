@@ -6,12 +6,17 @@ import { ThemeProvider } from '@material-tailwind/react'
 import { RouterProvider} from "react-router";
 import { router } from './Routes/Routers';
 import AuthProvider from './ProviderContext/AuthProvider';
+import { QueryClient, QueryClientProvider,} from '@tanstack/react-query'
+
+const queryClient = new QueryClient(); 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
       <AuthProvider>
-        <RouterProvider router={router} />
+         <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider> 
       </AuthProvider>
     </ThemeProvider>  
   </StrictMode>,

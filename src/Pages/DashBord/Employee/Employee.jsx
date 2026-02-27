@@ -6,12 +6,13 @@ import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
+import useWorks from '../../../Hooks/useWorks';
 
 const Employee = () => {
 
     const {user} = useAuth();
-    const AxiosSecure = useAxiosSecure(); 
-    const [works, setWorks] = useState([]);
+    const axiosSecure = useAxiosSecure(); 
+    const  [, refetch] = useWorks();
     const [editWork, setEditWork] = useState(null);
 
     // handle form submit
@@ -69,76 +70,68 @@ const Employee = () => {
         }
         console.log('addWork', AddWorkData)
         try{
-            const res = await AxiosSecure.post("/works", AddWorkData);
+            const res = await axiosSecure.post("/works", AddWorkData);
 
             if(res.data.insertedId){
                 Swal.fire("Work Added Successfully");
-                const works = await AxiosSecure.get(`/works/${user.email}`);
-                setWorks(works.data);
+                // const work = await AxiosSecure.get(`/works/${user.email}`);
+                // setWorks(works.data);
+                refetch();
             }
         }catch(err){
             console.log(err);
         }
-
+        
     }
     // Open edit modal
     const handleEdit = (work)=>{
         setEditWork(work);
     }
     // update work
-    const handleUpdate = async (updateWork)=>{
-        try{
-            const res = await AxiosSecure.put(`/works/${updateWork._id}`,updateWork)
-            if(res.data.modifirdCount>0){
-                Swal.fire('Work Updated Successfully');
-                setWorks((prev)=>
-                    prev.map((w)=>(works._id = updateWork._id? updateWork: w))
-                );
-                setEditWork(null);
+    const handleUpdate = async (updatedWork) => {
+        try {
+        const res = await axiosSecure.patch(`/works/${updatedWork._id}`,updatedWork);
+             if (res.data.modifiedCount > 0) {
+            Swal.fire("Work Updated Successfully");
+                refetch(); // ⭐ reload data from server
+                setEditWork(null); // close modal
             }
-        }catch(err){
-            console.log(err);
+        } catch (err) {
+        console.log(err);
         }
     };
     // delete work
-    const handleDelete = async(id)=>{
-        try{
-            const res = await AxiosSecure.delete(`/work/$(id)`);
-            if(res.data.deletcount){
-                Swal.fire('Work Delete Successfully')
-                setWorks((prev)=>(prev.filter((w)=> w._id !== id)))
+    const handleDelete = (id)=>{
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/works/${id}`)
+                .then( res =>{
+                    if(res.data.deletcount > 0){
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                    }
+                    refetch();
+                })               
             }
-        }catch(err){
-            console.log(err)
-        }
+        });
     };
-
-//   useEffect(()=>{
-//         AxiosSecure.get(`/works/${user.email}`)
-//         .then(res =>{
-//             setWorks(res.data)
-//             })
-//         .catch(err => console.log(err));
-//     },[AxiosSecure])
-
-    // Load works on mount
-    useEffect(()=>{
-
-    if(user?.email){
-
-    AxiosSecure
-    .get(`/works/${user.email}`)
-    .then(res => setWorks(res.data))
-    .catch(err => console.log(err));
-
-    }
-
-    },[user,AxiosSecure]);
  
     return (
         <div className=' gap-1  ml-5 mt-7'>
             <AddWorkForm onSubmit={handleWorkSubmit}></AddWorkForm>
-            <WorkSheet works={works} onEdit={handleEdit} onDelete={handleDelete} ></WorkSheet>
+            <WorkSheet onEdit={handleEdit} onDelete={handleDelete} ></WorkSheet>
             {
                 editWork && ( <UpdateWork work={editWork} onUpdate={handleUpdate} onClose={()=> setEditWork(null)}></UpdateWork>)
             }
