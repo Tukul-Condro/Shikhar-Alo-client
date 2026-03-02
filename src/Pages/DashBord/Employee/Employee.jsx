@@ -48,7 +48,7 @@ const Employee = () => {
         const res = await axiosSecure.patch(`/works/${updatedWork._id}`,updatedWork);
              if (res.data.modifiedCount > 0) {
             Swal.fire("Work Updated Successfully");
-                refetch(); // ⭐ reload data from server
+                refetch(); //  reload data from server
                 setEditWork(null); // close modal
             }
         } catch (err) {

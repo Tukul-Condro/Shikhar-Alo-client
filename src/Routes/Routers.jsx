@@ -13,6 +13,7 @@ import AllEmployee from "../Pages/DashBord/Admin/AllEmployee";
 import PayRoll from "../Pages/DashBord/Admin/PayRoll";
 import EmployeeList from "../Pages/DashBord/HR/EmployeeList";
 import Progress from "../Pages/DashBord/HR/Progress";
+import HR from "../Pages/DashBord/HR/HR";
 
 export const router = createBrowserRouter([
   {
@@ -54,7 +55,7 @@ export const router = createBrowserRouter([
       // HR related
       {
         path:'hr',
-        element:<EmployeeList></EmployeeList>
+        element:<HR></HR>
       },
       {
         path:'progrss',

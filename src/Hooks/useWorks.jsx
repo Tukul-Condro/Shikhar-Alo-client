@@ -24,7 +24,7 @@ const useWorks = ( all = false) => {
             const res = await axiosSecure.get(`/works?email=${user.email}`);
             return res.data
         },
-        enabled : all || !user?.email
+        enabled : all || !!user?.email
     });
     console.log('data',work);
 

@@ -3,10 +3,11 @@ import useUsers from '../../../Hooks/useUsers';
 
 const TABLE_HEAD = ["Name","Email","Bank-Account","Salary","Verfied","",""]
 
-const EmployeeList = () => {
+const EmployeeList = ({onPayEdit}) => {
 
     const {users , loading} = useUsers();
     const isVerified = true;
+
     if(loading){
         return <div className='text-center '>
             <Spinner></Spinner>
@@ -32,7 +33,7 @@ const EmployeeList = () => {
                        </tr>
                      </thead>
                 <tbody className="group text-sm text-gray-700 dark:text-white">
-                       {users.map(({ name,email, account_no,salary}, index) => {
+                       {users.map(( { name,email, account_no,salary}, index) => {
                          return (
                            <tr
                              key={index}
@@ -48,7 +49,7 @@ const EmployeeList = () => {
                                 }
                              </td>
                              <td className='space-x-5'>
-                                <Button className="text-green-400 h-9 text-center " >pay</Button>
+                                <Button className="text-green-400 h-9 text-center " onClick={() => onPayEdit()} >pay</Button>
                                 <Button className=" h-9 text-center" > Details</Button>
                              </td>
                                                      
