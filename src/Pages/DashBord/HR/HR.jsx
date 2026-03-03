@@ -5,15 +5,13 @@ import PayModal from './PayModal';
 
 const HR = () => {
 
-    const {editPay, setEditPay} = useState(null);
+    const [editPay, setEditPay ]= useState(null);
 
     const handlePayEdit = (payReq) =>{
         setEditPay (payReq);
     }
 
-    const handlePayReqSubmit = (payReq) =>{
-
-    }
+    
 
     return (
         <div>

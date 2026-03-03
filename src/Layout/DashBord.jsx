@@ -1,5 +1,6 @@
 
 import { NavLink, Outlet } from 'react-router-dom';
+import EmployeDetails from '../Pages/DashBord/HR/EmployeDetails';
 
 const DashBord = () => {
 

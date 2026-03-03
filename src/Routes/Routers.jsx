@@ -11,9 +11,9 @@ import UpdateWork from "../Pages/DashBord/Employee/UpdateWork";
 import PaymentHistory from "../Pages/DashBord/Employee/PaymentHistory";
 import AllEmployee from "../Pages/DashBord/Admin/AllEmployee";
 import PayRoll from "../Pages/DashBord/Admin/PayRoll";
-import EmployeeList from "../Pages/DashBord/HR/EmployeeList";
 import Progress from "../Pages/DashBord/HR/Progress";
 import HR from "../Pages/DashBord/HR/HR";
+import EmployeDetails from "../Pages/DashBord/HR/EmployeDetails";
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         {
           path:'/contact',
           element:<PrivateRoute><Contact></Contact></PrivateRoute>
-        }
+        },
     ]
   },  
   {
@@ -60,8 +60,7 @@ export const router = createBrowserRouter([
       {
         path:'progrss',
         element:<Progress></Progress>
-      }
-      ,
+      },
 
       // Employee related
       {
@@ -75,7 +74,13 @@ export const router = createBrowserRouter([
       {
         path:'paymentHistory',
         element:<PaymentHistory></PaymentHistory>
+      },
+      {
+        path:'employee-details/:id',
+        element:<EmployeDetails></EmployeDetails>     
       }
     ]
-  }
+  },
+
+
 ]);
