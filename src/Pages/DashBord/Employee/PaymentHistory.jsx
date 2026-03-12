@@ -1,36 +1,17 @@
 import { Typography } from "@material-tailwind/react";
+import usePayment from "../../../Hooks/usePayment";
+import useAuth from "../../../Hooks/useAuth";
 
-const TABLE_HEAD = ["Month", "Amount", "Transaction Id"];
-
-const TABLE_ROWS = [
-  {
-    monthYear: "April-2018",
-    amount: 1250,
-    transactionId: "TXN1001",
-  },
-  {
-    monthYear: "March-2018",
-    amount: 980,
-    transactionId: "TXN1002",
-  },
-  {
-    monthYear: "September-2017",
-    amount: 2100,
-    transactionId: "TXN1003",
-  },
-  {
-    monthYear: "December-2008",
-    amount: 450,
-    transactionId: "TXN1004",
-  },
-  {
-    monthYear: "October-2021",
-    amount: 1750,
-    transactionId: "TXN1005",
-  },
-];
+const TABLE_HEAD = ["Month", "Amount", "Status","Transaction Id",];
 
 export default function PaymentHistroy() {
+
+  const {user} = useAuth();
+  console.log("User:", user);
+  const [payRoll] = usePayment(user?.email);
+  console.log("User UID:", user?.email);
+  console.log("Payroll:", payRoll);
+
   return (
     <div className="w-full overflow-hidden px-5 " >
         <Typography className="m-10 text-center text-gray-700" variant="h2">All Payment History</Typography>
@@ -49,15 +30,16 @@ export default function PaymentHistroy() {
           </tr>
         </thead>
         <tbody className="group text-sm text-gray-700 dark:text-white">
-          {TABLE_ROWS.map(({ monthYear, amount, transactionId }, index) => {
+          {payRoll.map((payment, index) => {
             return (
               <tr
-                key={index}
+                key={payment._id || index}
                 className=" border-b font-medium even:bg-surface-light dark:even:bg-surface-dark"
               >
-                <td className="p-3">{monthYear}</td>
-                <td className="p-3">{amount} BDT</td>
-                <td className="p-3">{transactionId}</td>
+                <td className="p-3">{payment?.month} {payment?.year}</td>
+                <td className="p-3">{payment?.salary} BDT</td>
+                <td className="p-3">{payment?.status}</td>
+                <td className="p-3">{payment?.transactionId}</td>
               </tr>
             );
           })}

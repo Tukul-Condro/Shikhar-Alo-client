@@ -21,6 +21,7 @@
     "match-sorter": "^8.1.0",
     "react": "^19.1.1",
     "react-apexcharts": "^2.0.1",
+    "react-datepicker": "^9.1.0",
     "react-dom": "^19.1.1",
     "react-head": "^3.4.2",
     "react-hook-form": "^7.62.0",

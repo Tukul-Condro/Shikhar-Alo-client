@@ -1,13 +1,12 @@
 
 import { NavLink, Outlet } from 'react-router-dom';
-import EmployeDetails from '../Pages/DashBord/HR/EmployeDetails';
 
 const DashBord = () => {
 
 
 // TODO get admin value from the database
-    const isAdmin = null;
-    const isHR = true;
+    const isAdmin = true;
+    const isHR = null;
 
     return (
         <div className='flex max-w-6xl mx-auto'>

@@ -1,11 +1,15 @@
-import { Card, Button, Input } from "@material-tailwind/react";
+import { Card, Button, Input, Select, Option } from "@material-tailwind/react";
 import { Controller, useForm } from "react-hook-form";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+// import React, { useState } from 'react';
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 
 const PayModal = ({ payReq, onClose }) => {
 
   const axiosSecure = useAxiosSecure();
+  // const [startDate, setStartDate] = useState(new Date());
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -68,7 +72,24 @@ const PayModal = ({ payReq, onClose }) => {
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <Input {...field} label="Month (e.g. January)" />
+              <Select {...field} 
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  label="Month"
+              >
+                <Option value="JANUARY">JANUARY</Option>
+                <Option value="FEBRUARY">FEBRUARY</Option>
+                <Option value="MARCH">MARCH</Option>
+                <Option value="APRIL">APRIL</Option>
+                <Option value="MAY">MAY</Option>
+                <Option value="JUNE">JUNE</Option>
+                <Option value="JULY">JULY</Option>
+                <Option value="AUGUST">AUGUST</Option>
+                <Option value="SEPTEMBER">SEPTEMBER</Option>
+                <Option value="OCTOBER">OCTOBER</Option>
+                <Option value="NOVEMBER">NOVEMBER</Option>
+                <Option value="DECEMBER">DECEMBER</Option>
+              </Select>
             )}
           />
 
@@ -81,7 +102,12 @@ const PayModal = ({ payReq, onClose }) => {
               <Input type="number" {...field} label="Year" />
             )}
           />
-
+          {/* <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          dateFormat="yyyy" // Displays only the year in the input field
+          showYearPicker // Enables the year-only selection view
+        /> */}
           <div className="flex justify-end gap-3">
             <Button color="red" type="button" onClick={onClose}>
               Close
