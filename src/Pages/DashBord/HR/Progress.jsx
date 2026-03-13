@@ -47,23 +47,7 @@ const Progress = () => {
                        </tr>
                      </thead>
                 <tbody className="group text-sm text-gray-700 dark:text-white">
-                       {/* {allWork.map((w, index) => {
-                         return (
-                           <tr
-                             key={w._id}
-                             className=" border-b font-medium even:bg-surface-light dark:even:bg-surface-dark"
-                           >
-                             <td className="p-3">{w.name}</td>
-                             <td className="p-3">{w.email}</td>
-                             <td className="p-3">{w.account_no}</td>
-                             <td className="p-3">{w.salary}</td>
-                             <td className="p-3"> 
-                             </td>                         
-                           </tr>
-                         );
-                       })} */}
-
-                    {allWork.map((w, idx) => {
+                  {allWork.map((w, idx) => {
 
                       const matchedUser = userMap[w.email];
 
@@ -78,7 +62,8 @@ const Progress = () => {
                         </tr>
                       )
 
-                    })}                       
+                    })
+                  }                       
                 </tbody>
             </table>
         </div>

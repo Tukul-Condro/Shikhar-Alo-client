@@ -5,6 +5,7 @@ import { AuthContext } from "../../ProviderContext/AuthContext";
 import { Title } from "react-head";
 import GoogleLogin from "../SocialLogin/GoogleLogin";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const Login = () => {
@@ -12,10 +13,11 @@ const Login = () => {
     const {signIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosSecure = useAxiosPublic();
 
     const from = location.state?.from?.pathname || "/";
     
-    const handleLogin = event =>{
+    const handleLogin = ( event )=>{
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
@@ -27,11 +29,27 @@ const Login = () => {
         .then(result =>{
             const user = result.user;
             console.log(user);
-            Swal.fire({
-                    title: "Login Successfull!",
-                    icon: "success"
+            // Fetch user from backend to check if fired
+         axiosSecure.get(`/users/email/${email}`)
+            .then((res) =>{
+                const userData = res.data;
+            if(userData.fired){
+              // Fired -> sign out immediately
+                signIn.auth.signOut().then(() => {
+                    Swal.fire({
+                    icon: "error",
+                    title: "Access Denied",
+                    text: "Your account has been fired. You cannot log in.",
+                    });
+                });                    
+            } else {
+                // Normal login
+                Swal.fire({
+                    title: "Login Successful!",
+                    icon: "success",
                 });
-            navigate(from, { replace: true});
+                navigate(from, { replace: true });
+            }
         })
         .catch(error => {
             console.log(error.code);
@@ -43,6 +61,8 @@ const Login = () => {
             });
           }
         });
+            
+        })
     }
 
     return (

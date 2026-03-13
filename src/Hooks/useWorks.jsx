@@ -10,10 +10,7 @@ const useWorks = ( all = false) => {
     const {refetch , data: work=[]} = useQuery({
         
         // query key different for cache
-        queryKey:all
-        ?['allWork']
-        :['work', user?.email],
-
+        queryKey: all?['allWork'] : ['work', user?.email],
         queryFn: async () => {
             // get all users work
             if(all){

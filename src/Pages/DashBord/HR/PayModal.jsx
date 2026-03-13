@@ -35,6 +35,14 @@ const PayModal = ({ payReq, onClose }) => {
     try {
       const res = await axiosSecure.post("/payroll", payrollData);
 
+      if (!res.data.success) {
+      Swal.fire({
+        icon: "error",
+        title: res.data.message
+      });
+      return;
+    }
+
       if (res.data.insertedId) {
         Swal.fire("Success!", "Payment Request Sent to Admin", "success");
         onClose();

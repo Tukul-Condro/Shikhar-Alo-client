@@ -8,13 +8,13 @@ export default function PaymentHistroy() {
 
   const {user} = useAuth();
   console.log("User:", user);
-  const [payRoll] = usePayment(user?.email);
+  const [payRoll] = usePayment(false);
   console.log("User UID:", user?.email);
   console.log("Payroll:", payRoll);
 
   return (
     <div className="w-full overflow-hidden px-5 " >
-        <Typography className="m-10 text-center text-gray-700" variant="h2">All Payment History</Typography>
+        <Typography className="m-10 text-center text-gray-700" variant="h2">Total Payment History - {payRoll.length}</Typography>
       <table className="w-full mt-8 text-center">
         <thead className="w-full min-w-max table-auto text-left">
           <tr className="text-center">
