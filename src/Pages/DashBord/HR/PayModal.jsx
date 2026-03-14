@@ -110,12 +110,6 @@ const PayModal = ({ payReq, onClose }) => {
               <Input type="number" {...field} label="Year" />
             )}
           />
-          {/* <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          dateFormat="yyyy" // Displays only the year in the input field
-          showYearPicker // Enables the year-only selection view
-        /> */}
           <div className="flex justify-end gap-3">
             <Button color="red" type="button" onClick={onClose}>
               Close

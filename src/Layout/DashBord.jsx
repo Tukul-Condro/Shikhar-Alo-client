@@ -5,8 +5,8 @@ const DashBord = () => {
 
 
 // TODO get admin value from the database
-    const isAdmin = true;
-    const isHR = null;
+    const isAdmin = null;
+    const isHR = true;
 
     return (
         <div className='flex max-w-6xl mx-auto'>
