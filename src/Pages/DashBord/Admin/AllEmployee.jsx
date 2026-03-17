@@ -2,17 +2,35 @@ import { Button, Spinner, Typography, Dialog, DialogHeader, DialogBody, DialogFo
 import { useState } from 'react';
 import useUsers from '../../../Hooks/useUsers';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const TABLE_HEAD = ["Name", "Designation","",""];
 
 const AllEmployee = () => {
 
-    const {users , loading} = useUsers();
+    const {users , loading, refetch} = useUsers();
     const axiosSecure = useAxiosSecure();
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [firedUsers, setFiredUsers] = useState([]);
+
+  const handleMakeHR = (user) =>{
+    axiosSecure.patch(`/users/${user._id}`)
+    .then(res =>{
+      console.log(res.data)
+      if(res.data.modifiedCount > 0){
+        refetch();
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: `${user.name} is HR Now!`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
+  }
   
   const handleOpenModal = (user) => {
     setSelectedUser(user);
@@ -23,6 +41,7 @@ const AllEmployee = () => {
     setSelectedUser(null);
     setOpenModal(false);
   };
+
   const handleFireUser = async () => {
     try {
       if (!selectedUser) return;
@@ -41,7 +60,7 @@ const AllEmployee = () => {
 
     if(loading){
         return <div className='text-center'>
-            <Spinner></Spinner>
+            <Spinner className='text-center h-10 w-full mt-44'></Spinner>
         </div>
     }
 
@@ -60,15 +79,27 @@ const AllEmployee = () => {
           </tr>
         </thead>
         <tbody className="group text-sm text-gray-700 dark:text-white">
-          {users.map(({ _id, name, designation, fired }, index) => (
+          {users.map((user) => {
+            const { _id, name, designation, fired, role } = user;
+
+            return(
             <tr
-              key={index}
+              key={_id}
               className="border-b font-medium even:bg-surface-light dark:even:bg-surface-dark"
             >
               <td className="p-3">{name}</td>
               <td className="p-3">{designation}</td>
               <td className="space-x-5">
-                <Button className="text-green-400 h-9" disabled={fired}>Make HR</Button>
+
+                {/* HR BUTTON */}
+                <Button 
+                onClick={() => handleMakeHR(_id)}
+                disabled={role === "hr" || fired}
+                className="text-green-400 h-9" >
+                  {role === "hr" ? "HR" : "Make HR"}
+                </Button>
+
+               {/* Fire button */}
                 {fired || firedUsers.includes(_id) ? (
                   <Typography color="red" className="font-medium">Fired</Typography>
                 ) : (
@@ -81,7 +112,8 @@ const AllEmployee = () => {
                 )}
               </td>
             </tr>
-          ))}
+            )
+          })}
         </tbody>
       </table>
     {/* Confirmation Modal */}

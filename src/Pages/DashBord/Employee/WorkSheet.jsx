@@ -1,7 +1,7 @@
 import { Button, Card, Typography } from "@material-tailwind/react";
 import useWorks from "../../../Hooks/useWorks";
 
-const TABLE_HEAD = ["SL-No.","Job", "WorkTime", "WorkingDay", "", "" ];
+const TABLE_HEAD = ["SL-No.","Job", "WorkTime", "WorkingDay", "", ];
  
 const WorkSheet = ({ onEdit,onDelete}) => {
 
@@ -43,7 +43,7 @@ const WorkSheet = ({ onEdit,onDelete}) => {
                         <td className="p-2">{w.workHour} Hour</td>
                         <td className="p-2">{w.date}</td>
                         <td className='space-x-5'>
-                            <Button className="text-green-400 h-9 text-center hover:bg-green-500 hover:text-white" onClick={() => onEdit(w)}>🖊</Button>
+                            <Button  className="text-green-400 h-9 text-center hover:bg-green-500 hover:text-white" onClick={() => onEdit(w)}>🖊</Button>
                             <Button className="text-red-500 hover:bg-orange-400 h-9 text-center" onClick={() => onDelete(w._id)}>❌</Button>
                             </td>
                         </tr>

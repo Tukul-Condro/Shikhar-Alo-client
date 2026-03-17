@@ -57,7 +57,7 @@ const Progress = () => {
 
         if(loading){
             return <div className='text-center '>
-                <Spinner></Spinner>
+                <Spinner className='text-center h-10 w-full mt-44'></Spinner>
             </div>
         }
         

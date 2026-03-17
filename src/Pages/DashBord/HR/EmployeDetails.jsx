@@ -31,7 +31,7 @@ const EmployeDetails = () => {
      if (employeeLoading || payrollLoading) {
         return (
         <div className="text-center mt-10">
-            <Spinner />
+            <Spinner className='text-center h-10 w-full mt-44' />
         </div>
         );
     }
