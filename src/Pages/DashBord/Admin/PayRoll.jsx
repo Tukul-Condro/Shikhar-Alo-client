@@ -97,7 +97,7 @@ const PayRoll = () => {
                         <th>{idx + 1}</th>
                         <td className="p-2">{p.name}</td>
                         <td className="p-2">{p.salary}</td>
-                        <td className="p-2">{p.month}{p.year}</td>
+                        <td className="p-2">{p.month} {p.year}</td>
                         <td>{p.date ? new Date(p.date).toLocaleDateString() : "N/A"}</td>
                         <td>
                             <button 
