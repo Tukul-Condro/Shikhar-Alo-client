@@ -7,7 +7,7 @@ const useWorks = ( all = false) => {
     //  tan stack query
     const axiosSecure = useAxiosSecure();
     const{ user} = useAuth();
-    const {refetch , data: work=[]} = useQuery({
+    const {refetch , data: work=[],isLoading} = useQuery({
         
         // query key different for cache
         queryKey: all?['allWork'] : ['work', user?.email],
@@ -25,7 +25,7 @@ const useWorks = ( all = false) => {
     });
     console.log('data',work);
 
-    return [work, refetch]
+    return [work, refetch, isLoading]
 };
 
 export default useWorks;

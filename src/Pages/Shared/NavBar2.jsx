@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Navbar,MobileNav,Typography,Button,IconButton,Avatar,Menu,MenuHandler,MenuList,
   MenuItem,
@@ -7,10 +7,32 @@ import {
 import { ChevronDownIcon, Cog6ToothIcon, InboxArrowDownIcon, LifebuoyIcon, PowerIcon, UserCircleIcon } from '@heroicons/react/16/solid';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../ProviderContext/AuthContext';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const NavBar2 = () => {
   
   const {user , logOut} = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+  const [role, setRole] = useState("");
+  
+  useEffect(() => {
+    if (user?.email) {
+      axiosSecure.get(`/users/role/${user.email}`)
+      .then(res => {
+        setRole(res.data.role);
+      })
+      .catch(error => {
+        console.log(error);})
+    }
+  }, [user?.email]);
+
+  const dashboardPath =
+  role === "admin"
+    ? "/dashbord/admin"
+    : role === "hr"
+    ? "/dashbord/hr"
+    : "/dashbord/employee";
+
   const handlelogOut = () => {
     logOut()
       .then(()=>{})
@@ -22,7 +44,7 @@ const NavBar2 = () => {
     <>
       <MenuItem className="flex items-center gap-2 rounded hover:bg-pink-400/30">
         <UserCircleIcon className="h-4 w-4" />
-        <Link to="dashbord/employee">My Profile</Link>
+        <Link to={dashboardPath}>My Profile</Link>
       </MenuItem>
 
       <MenuItem className="flex items-center gap-2 rounded hover:bg-pink-400/30">
@@ -92,7 +114,7 @@ const NavBar2 = () => {
         );
   }, []);
 
-
+  // const {user} = useAuth();
     const navList = <>
       <ul className="mt-2 mb-4 flex flex-col gap-2  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
         <Typography
@@ -112,7 +134,7 @@ const NavBar2 = () => {
             className="p-1 font-normal"
         >
             <li className="flex items-center font-bold text-xl">
-            <Link to="/dashbord/employee">DashBord</Link>
+            <Link to={dashboardPath}>DashBord</Link>
             </li>
         </Typography>
         <Typography

@@ -10,12 +10,14 @@ const Progress = () => {
 
     const {users , loading} = useUsers();
     const [allWork] = useWorks(true);
+    console.log("ALL WORK:", allWork);
 
-    const currentMonth = new Date().getMonth() + 1;
-    const currentYear = new Date().getFullYear();
+    // const currentMonth = new Date().getMonth() + 1;
+    // const currentYear = new Date().getFullYear();
 
     const [selectedEmployee, setSelectedEmployee] = useState("");
-    const [selectedMonth, setSelectedMonth] = useState(currentMonth.toString(),currentYear);const [selectedYear, setSelectedYear] = useState(currentYear.toString());
+    const [selectedMonth, setSelectedMonth] = useState("");
+    const [selectedYear, setSelectedYear] = useState("");
 
     const userMap = useMemo(() => {
 
@@ -51,10 +53,10 @@ const Progress = () => {
             return matchEmployee && matchMonth && matchYear;
 
         });
-
+        
 
     }, [allWork, selectedEmployee, selectedMonth, selectedYear]);
-
+console.log("FILTERED WORK:", filteredWorks);
         if(loading){
             return <div className='text-center '>
                 <Spinner className='text-center h-10 w-full mt-44'></Spinner>

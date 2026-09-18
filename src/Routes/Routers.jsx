@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element:<Main></Main>,
-    errorElement:<h><span className="mx-150  text-2xl ">page not found</span></h>,
+    errorElement:<div><span className="mx-150  text-2xl ">page not found</span></div>,
     children:[
         {
             path:'/',
@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
         element:<HR></HR>
       },
       {
-        path:'progrss',
+        path:'progress',
         element:<Progress></Progress>
       },
 

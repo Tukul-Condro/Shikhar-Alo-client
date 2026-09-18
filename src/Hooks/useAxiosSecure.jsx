@@ -31,7 +31,7 @@ const useAxiosSecure = () => {
         const status = error?.response?.status;
 
         // ❗ Redirect only, NO logout, NO loading manipulation
-        if ((status === 401 || status === 403) && user) {
+        if (status === 401  && user) {
           navigate("/login");
         }
 
