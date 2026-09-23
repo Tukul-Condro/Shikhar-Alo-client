@@ -8,7 +8,7 @@ export default function PaymentHistroy() {
 
   const {user} = useAuth();
   console.log("User:", user);
-  const [payRoll] = usePayment(true);
+  const [payRoll] = usePayment();
   console.log("User UID:", user?.email);
   console.log("Payroll:", payRoll);
 

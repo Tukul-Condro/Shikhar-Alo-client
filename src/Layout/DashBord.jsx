@@ -65,9 +65,10 @@ const DashBord = () => {
         {/* Admin Dashboard */}
         <div className='text-center text-2xl font-bold border-1 rounded-xl bg-pink-300 px-2 py-1 fixed top-0 left-35 right-260 z-10'>
             {userData?.name }
+            <span className='ml-2 text-sm font-normal'>{userData?.role}</span>
         </div>
-        <li className='hover:bg-pink-300 text-left px-2 py-1'>
-            <NavLink  to="/">Home | Admin</NavLink>
+        <li className='hover:bg-pink-300 text-center px-2 py-1'>
+            <NavLink  to="/">Home</NavLink>
         </li>
             <div className='divider border-b'></div>
         <li className='text-left'>
@@ -89,9 +90,10 @@ const DashBord = () => {
         {/* HR Dashboard */}
         <div className='text-center text-2xl font-bold border-1 rounded-xl bg-pink-300 px-2 py-1 fixed top-0 left-35 right-260 z-10'>
             {userData?.name }
+            <span className='ml-2 text-sm font-normal'>{userData?.role}</span>
         </div>
-        <li className='hover:bg-pink-300 text-left px-2 py-1'>
-            <NavLink  to="/">Home | Hr</NavLink>
+        <li className='hover:bg-pink-300 text-center px-2 py-1'>
+            <NavLink  to="/">Home</NavLink>
         </li>
             <div className='divider border-b'></div>
         <li className='text-left'>
@@ -113,9 +115,10 @@ const DashBord = () => {
         {/* Employee Dashboard */}
         <div className='text-center text-2xl  font-medium border-1 rounded-xl bg-pink-300 mt-0.5 px-2 py-0 fixed top-0 left-35 right-260 z-10'>
             {userData?.name }
+            <span className='ml-2 text-sm font-normal'>{userData?.role}</span>
         </div>
-        <li className='hover:bg-pink-300 text-left px-2 py-1'>
-            <NavLink  to="/">Home | Employee</NavLink>
+        <li className='hover:bg-pink-300 text-center px-2 py-1'>
+            <NavLink  to="/">Home</NavLink>
         </li>
             <div className='divider border-b'></div>
         <li className='text-left'>

@@ -6,7 +6,7 @@ import useAuth from "./useAuth";
 const usePayment = ( all = false ) => {
 
     const {user} = useAuth();
-    console.log("Employee ID:", user.email)
+    console.log("Employee ID:", user?.email)
     const axiosSecure = useAxiosSecure();
 
     const {refetch, data:payRoll=[]} =useQuery({
