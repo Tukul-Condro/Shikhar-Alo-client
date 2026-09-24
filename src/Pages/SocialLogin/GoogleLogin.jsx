@@ -29,8 +29,16 @@ const GoogleLogin = () => {
                     title: "SignIn Success",
                     icon: "success",
                 });
+                navigate(from , {replace : true});
             })
-            navigate(from , {replace : true});
+            .catch(error =>{
+                console.log("google sign in error",error);
+                Swal.fire({
+                    position: "top-end",
+                    title: "SignIn Failed",
+                    icon: "error",
+                });
+            })
         })
     }
     return (

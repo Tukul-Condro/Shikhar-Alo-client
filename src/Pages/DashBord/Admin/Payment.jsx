@@ -1,6 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import CheckoutFrom from "./CheckoutFrom";
+import CheckoutFrom from "./checkoutFrom";
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_payment_Getway_Pk);
